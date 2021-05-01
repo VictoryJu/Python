@@ -2,7 +2,6 @@ def foo(month):
     x = int(month / 3)
     if month % 3 == 0:
         x -= 1
-
     return x
 
 number = int(input())
