@@ -7,7 +7,6 @@ function refine(item) {
             setTimeout(() => {
                 const result = item % 5;
                 resolve(result);
-                console.log(result)
             }, Math.random() * 200);
         } catch (e) {
             console.error(e);
@@ -17,38 +16,31 @@ function refine(item) {
 }
 
 // Solve #1
+/*
+async function solution() {
+    const results: number[] = [];
+    for (const item of numbers) {
+        console.log(`${item}`)
+        results.push(await refine(item));
+    }
+    return results
+}
+*/
 
-// async function solution() {
-//     const results = [];
-//     for (const item of numbers) {
-//         console.log(`${item}`)
-//         results.push(await refine(item));
-//     }
-//     return results
-// }
-
-
-//Solve #2
+// Solve #2
 function solution() {
-    return new Promise((resolve, reject) => {
-      //코드 작성
-        let results = [];
-        try{
-            for(const item of numbers)
-                {
-                    console.log(`${item}`);
-                }
-                Promise.resolve()
-                        .then(()=>{
-                            for(const item of numbers)
-                            {
-                                results.push(refine(item))
-                            };  //순서대로 진행하고 for문이 끝난뒤에 resolve를 하고싶음
-                        }).then(results)
-                        .then((results)=>resolve(results));  
+    return new Promise(function (resolve, reject) {
+        //코드 작성
+        try {
+            const results = Promise.all(numbers.map(function (item) {
+                console.log(`${item}`);
+                return refine(item);
+            }));
+            resolve(results);
         }
-        catch(e){
-            reject(error)
+        catch (e) {
+            console.error(e);
+            reject(-1);
         }
     });
 }
