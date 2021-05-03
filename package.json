@@ -4,6 +4,7 @@
   "description": "",
   "main": "cod.js",
   "dependencies": {
+    "oembed-auto": "0.0.3",
     "typescript": "^4.2.4"
   },
   "devDependencies": {
